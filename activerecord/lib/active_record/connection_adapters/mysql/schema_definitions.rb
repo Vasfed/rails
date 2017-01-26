@@ -71,7 +71,6 @@ module ActiveRecord
         def polygon(*args, **options)
           args.each { |name| column(name, :polygon, options) }
         end
-
       end
 
       class ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition

@@ -1,3 +1,18 @@
+*   Support for spatial data types in database schema for mysql2 adapter
+
+    Now it is possible to have:
+
+        create_table :some_table do |t|
+          t.geometry   :geometry_field
+          t.polygon    :polygon_field, null: false, index: { type: :spatial }
+          t.point      :point_field
+          t.linestring :linestring_field
+        end
+
+    without switching to sql schema format and raw sql in migrations.
+
+    *Vasily Fedoseyev*
+
 *   Deprecate `initialize_schema_migrations_table` and `initialize_internal_metadata_table`.
 
     *Ryuta Kamizono*

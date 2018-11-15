@@ -31,6 +31,16 @@ class RendererTest < ActiveSupport::TestCase
     assert_equal "true", content
   end
 
+  test "creating with new defaults without env recreation" do
+    renderer = ApplicationController.renderer
+
+    new_defaults = { https: true }
+    new_renderer = renderer.with_defaults(new_defaults)
+    content = new_renderer.render(inline: "<%= request.ssl? %>")
+
+    assert_equal "true", content
+  end
+
   test "rendering with a class renderer" do
     renderer = ApplicationController.renderer
     content  = renderer.render template: "ruby_template"

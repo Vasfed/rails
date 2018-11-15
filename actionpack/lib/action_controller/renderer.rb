@@ -58,7 +58,7 @@ module ActionController
 
     # Create a new renderer for the same controller but with new defaults.
     def with_defaults(defaults)
-      self.class.new controller, @env, self.defaults.merge(defaults)
+      self.class.new controller, @original_env, self.defaults.merge(defaults)
     end
 
     # Accepts a custom Rack environment to render templates in.
@@ -67,7 +67,8 @@ module ActionController
     def initialize(controller, env, defaults)
       @controller = controller
       @defaults = defaults
-      @env = normalize_keys defaults.merge(env)
+      @original_env = env
+      @env = normalize_keys(defaults).merge(normalize_keys(env))
     end
 
     # Render templates with any options from ActionController::Base#render_to_string.
